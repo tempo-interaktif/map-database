@@ -78,22 +78,6 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ea aspernatur reprehenderit voluptate suscipit, quae laborum, distinctio, dicta dolor alias soluta error. Porro nulla in, nam sit rerum nisi reiciendis?</p>
         </div>
         <div class="list">
-            <div class="column" onclick="klik(1)">
-                <div class="card">
-                    <span>28 January 2019</span>
-                    <br><br><b>Unkhair</b><br><br>
-                    <b>Mahasiswa</b>
-                    <p>Terkait partisipasi aksi</p>
-                </div>
-            </div>
-            <div class="column" onclick="klik(1)">
-                <div class="card">
-                    <span>28 January 2019</span>
-                    <br><br><b>Unkhair</b><br><br>
-                    <b>Mahasiswa</b>
-                    <p>Terkait partisipasi aksi</p>
-                </div>
-            </div>
         </div>
         <span class="end"></span>
     </div>
@@ -127,12 +111,13 @@
     </div>
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <div class="modal-header">
-            <h2 style="width:60%" id="name">Nama Korban</h2><h2 class="hide-mobile" style="width:38%" id="date">Tanggal</h2>
-            <span class="close">&times;</span>
-        </div>
         <div class="modal-body">
-            <h3 class="hide-desktop" id="date">Tanggal</h3><br>
+            <div class="icon-container">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+            </div>
+            <h3 class="hide-desktop" id="name">Tanggal</h3><br>
             <label>LOKASI :</label>
             <p id="LOKASI">LOKASI</p><br>
             <label>PROVINSI :</label>
@@ -194,7 +179,7 @@ function klik(id) {
   kasusFiltered =  kasus.filter(function(data) {
     return data.ID == id;
   });
-  $('#name').html(kasusFiltered[0].ISU);
+  $('#name').html(kasusFiltered[0].KORBAN);
   $('[id=date]').html(kasusFiltered[0].TANGGAL);
   $('#LOKASI').html(kasusFiltered[0].LOKASI);
   $('#PROVINSI').html(kasusFiltered[0].PROVINSI);
