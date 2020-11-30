@@ -176,16 +176,21 @@
     font-weight: 800;
   }
 
-  .modal-header{
-    display:flex;
-    background:#686868;
-    padding: 0 20px;
-  }
-
   .modal-body{
     padding: 20px;
+    max-height: 90vh;
   }
 
+  .modal-body .icon-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin-bottom: 20px;
+  }
+  .modal-body .icon-container img{
+      width: 100px;
+      display: block;
+      margin: 0 auto;
+  }
   /* The Close Button */
   .close {
     color: #fff;
