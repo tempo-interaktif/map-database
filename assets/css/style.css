@@ -1,12 +1,20 @@
 .fixed-background{
-    position: relative;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  box-sizing: border-box;
+}
+.title{
+    height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 100px 0;
-    box-sizing: border-box;
+}
+.pad{
+  padding: 1rem 20%;
 }
 .title-container{
     padding: 20px 10px;
@@ -205,11 +213,48 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
     margin-bottom: 20px;
+    list-style: none;
+    padding: 0;
   }
-  .modal-body .icon-container img{
-      width: 100px;
-      display: block;
-      margin: 0 auto;
+  .modal-body .icon-container li{
+    display: table-cell;
+    text-align: center;
+    position: relative;
+  }
+  .modal-body .icon-container li:nth-child(1)::after{
+    content: "";
+    position: absolute;
+    height: 5px;
+    background: #fff;
+    top: 70px;
+    width: 100%;
+    z-index: 4;
+    left: 50%;
+  }
+  .modal-body .icon-container li:last-child::after{
+    content: "";
+    position: absolute;
+    height: 5px;
+    background: #fff;
+    top: 70px;
+    width: 100%;
+    z-index: 4;
+    right: 50%;
+  }
+  .modal-body .icon-container li span{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5;
+    background-color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  .modal-body .icon-container li span img{
+    width: 100%;
   }
   /* The Close Button */
   .close {

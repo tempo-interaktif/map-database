@@ -61,24 +61,26 @@
 </head>
 <body>
     <div class="image-background fixed-background" style="background-image: url('https://interaktif.tempo.co/frontend/interaktif/images/bg.jpg');background-position: center;background-attachment: fixed;background-size: cover;">
-        <div class="title-container">
-            <h1>MAP DATABASE</h1>
+        <div class="title">
+            <div class="title-container">
+                <h1>MAP DATABASE</h1>
+            </div>
+            <div class="description-container">
+                <p>Lorem 197 ipsum dolor sit amet</p>
+            </div>
+            <div class="search-container">
+                <button class="btn-search"><i class="fa fa-search"></i></button>
+                <input type="text" name="search" id="search" class="input-search" placeholder="Cari Provinsi">
+            </div>
         </div>
-        <div class="search-container">
-            <button class="btn-search"><i class="fa fa-search"></i></button>
-            <input type="text" name="search" id="search" class="input-search" placeholder="Cari Provinsi">
-        </div>
-        <div class="description-container">
-            <p>Lorem <font id="count"></font> ipsum dolor sit amet</p>
+        <div class="pad">
+            <div class="list">
+            </div>
         </div>
     </div>
     <div class="body">
         <span class="start"></span>
-        <div class="paragraf">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ea aspernatur reprehenderit voluptate suscipit, quae laborum, distinctio, dicta dolor alias soluta error. Porro nulla in, nam sit rerum nisi reiciendis?</p>
-        </div>
-        <div class="list">
-        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ea aspernatur reprehenderit voluptate suscipit, quae laborum, distinctio, dicta dolor alias soluta error. Porro nulla in, nam sit rerum nisi reiciendis?</p>
         <span class="end"></span>
     </div>
     <div class="credit">
@@ -112,11 +114,26 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <div class="modal-body">
-            <div class="icon-container">
-                <img src="assets/images/icon.png" alt="">
-                <img src="assets/images/icon.png" alt="">
-                <img src="assets/images/icon.png" alt="">
-            </div>
+            <ul class="icon-container">
+                <li>
+                    <p>lorem</p>
+                    <span>
+                        <img src="assets/images/icon.png" alt="">
+                    </span>
+                </li>
+                <li>
+                    <p>lorem</p>
+                    <span>
+                        <img src="assets/images/icon.png" alt="">
+                    </span>
+                </li>
+                <li>
+                    <p>lorem</p>
+                    <span>
+                        <img src="assets/images/icon.png" alt="">
+                    </span>
+                </li>
+            </ul>
             <h3 class="hide-desktop" id="name">Tanggal</h3><br>
             <label>LOKASI :</label>
             <p id="LOKASI">LOKASI</p><br>
@@ -211,13 +228,11 @@ $(document).on('click','.btn-search',function(e) {
         return data.PROVINSI == search.toUpperCase();
     });
     var tombol = '';
-        tombol += '<h3>Daftar Korban Provinsi '+search.toUpperCase()+'</h3>'
+        tombol += '<h3 style="text-align:center;color:#fff;text-shadow: 2px 2px rgb(0, 0, 0, 0.5);">Total '+kasusFilteredProvinsi.length+' Korban di Provinsi '+search.toUpperCase()+'</h3>'
         $.each(kasusFilteredProvinsi,function(kety, value){
             tombol += '<div class="column" onclick="klik('+value.ID+')"><div class="card"><span>'+value.TANGGAL+'</span><br><br><b>'+value.LOKASI+'</b><br><br><b>'+value.GOLONGAN+'</b><p>'+value.ISU+'</p></div></div>';
         });
         $('.list').html(tombol);
-        $('.paragraf').hide();
-        $('#count').html(kasusFilteredProvinsi.length)
     kasusFilteredProvinsi = []
 })
 $(document).on('click','#readmore',function(e) {
