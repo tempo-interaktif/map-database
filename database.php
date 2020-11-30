@@ -87,7 +87,7 @@ ga('send', 'pageview', {
                     <p>Dugaan penyiksaan terhadap tahanan oleh polisi terjadi hampir di semua tingkatan mulai dari kepolisian sektor sampai kepolisian daerah.</p>
                 </div>
             </div>
-            <div id="map-container"></div>
+            <div id="map-container" style="overflow-x: scroll;"></div>
             <div class="desc">
                 <h5 style="margin:5px">Provinsi</h6>
                 <h3 style="margin:5px" id="provinsi"></h3>
@@ -151,38 +151,59 @@ ga('send', 'pageview', {
 <script src="//unpkg.com/d3"></script>
 <script src="assets/js/map.js"></script>
 <script>
+var kasus = [];
+
 $(document).ready(function() {
-    $('.column').click(function() {
-        $('#myModal').slideDown(500);
-    })
+  var url = new URL(document.URL);
+  var urlP = url.searchParams;
 
-    $('.close').click(function() {
-        $('#myModal').slideUp(500);
-    })
+  const xxx = $.getJSON("data.json",function(data){
+      kasus = data.Sheet1;
+  });
+  Promise.all([xxx]).then(res => {
+    if (urlP.has('search')) {
+      search = urlP.get('search')
+      console.log(kasus)
+    }else{
+        var tombol = '';
+        $.each(kasus,function(kety, value){
+            tombol += '<div class="column" onclick="klik('+value.ID+')"><div class="card"><span>'+value.TANGGAL+'</span><br><br><b>'+value.LOKASI+'</b><br><br><b>'+value.GOLONGAN+'</b><p>'+value.ISU+'</p></div></div>';
+        });
+        $('.list').html(tombol);
+    }
+  })
 
-    $(window).click(function(e) {
-        if ($(e.target).is('#myModal')) {
-            $('#myModal').slideUp(500);
-        }
-    })
+  $('.column').click(function() {
+      $('#myModal').slideDown(500);
+  })
 
-    $('#list').click(function() {
-        $('.map').hide();
-        $('.filter-btn').show();
-        $('.vert-move').show();
-        $('.list').show(700);
-        $(this).attr('class','on')
-        $('#map').attr('class','off')
-    })
+  $('.close').click(function() {
+      $('#myModal').slideUp(500);
+  })
 
-    $('#map').click(function() {
-        $('.list').hide();
-        $('.filter-btn').hide();
-        $('.vert-move').hide();
-        $('.map').slideDown(500);
-        $(this).attr('class','on')
-        $('#list').attr('class','off')
-    })
+  $(window).click(function(e) {
+      if ($(e.target).is('#myModal')) {
+          $('#myModal').slideUp(500);
+      }
+  })
+
+  $('#list').click(function() {
+      $('.map').hide();
+      $('.filter-btn').show();
+      $('.vert-move').show();
+      $('.list').show(700);
+      $(this).attr('class','on')
+      $('#map').attr('class','off')
+  })
+
+  $('#map').click(function() {
+      $('.list').hide();
+      $('.filter-btn').hide();
+      $('.vert-move').hide();
+      $('.map').slideDown(500);
+      $(this).attr('class','on')
+      $('#list').attr('class','off')
+  })
 })
 </script>
 <script>
@@ -201,19 +222,7 @@ $(document).ready(function() {
     });
 </script>
 <script type="text/javascript">
-var kasus = [];
 var kasusFiltered;
-
-$(document).ready(function(){
-    $.getJSON("data.json",function(data){
-        var tombol = '';
-        kasus = data.Sheet1;
-        $.each(data.Sheet1,function(kety, value){
-            tombol += '<div class="column" onclick="klik('+value.ID+')"><div class="card"><span>'+value.TANGGAL+'</span><br><br><b>'+value.LOKASI+'</b><br><br><b>'+value.GOLONGAN+'</b><p>'+value.ISU+'</p></div></div>';
-        });
-        $('.list').html(tombol);
-    });
-});
 
 function klikPulau(ini){
   var kasusFilteredProvinsi = [];
