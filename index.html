@@ -66,11 +66,25 @@
                 <h1>MAP DATABASE</h1>
             </div>
             <div class="description-container">
-                <p>Lorem 197 ipsum dolor sit amet</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum at ullam excepturi eos, numquam asperiores facilis quia nulla. Voluptate voluptatibus fugiat obcaecati molestias rem labore possimus eaque quia voluptatem repellendus?</p>
+                <p style="text-align: center;">Lorem 197 ipsum dolor sit amet</p>
+                <p>instruksi Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </div>
             <div class="search-container">
-                <button class="btn-search"><i class="fa fa-search"></i></button>
-                <input type="text" name="search" id="search" class="input-search" placeholder="Cari Provinsi">
+                <div class="btn-search-container">
+                    <a data-target="#search-represi" class="btn-search-category">JENIS REPRESI</a>
+                    <a data-target="#search-institusi" class="btn-search-category">INSTITUSI</a>
+                    <a data-target="#search-provinsi" class="btn-search-category">PROVINSI</a>
+                </div>
+                <div class="back-container">
+                    <div class="search-input-container">
+                        <button class="btn-search"><i class="fa fa-search"></i></button>
+                        <input type="text" id="search-represi" class="input-search" placeholder="Cari Jenis Represi">
+                        <input type="text" id="search-institusi" class="input-search" placeholder="Cari Institusi">
+                        <input type="text" id="search-provinsi" class="input-search" placeholder="Cari Provinsi">
+                    </div>
+                    <a data-target="#back" class="back">Kembali awal</a>
+                </div>
             </div>
         </div>
         <div class="pad">
@@ -114,7 +128,7 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <div class="modal-body">
-            <ul class="icon-container">
+            <!-- <ul class="icon-container">
                 <li>
                     <p>lorem</p>
                     <span>
@@ -133,7 +147,7 @@
                         <img src="assets/images/icon.png" alt="">
                     </span>
                 </li>
-            </ul>
+            </ul> -->
             <h3 class="hide-desktop" id="name">Tanggal</h3><br>
             <label>LOKASI :</label>
             <p id="LOKASI">LOKASI</p><br>
@@ -221,18 +235,46 @@ function klik(id) {
   
   $('#myModal').slideDown(500);
 }
+$(document).on('click','.btn-search-category',function(e) {
+    var link = $(this).data('target')
+    $('.btn-search-container').hide()
+    $('.back-container, '+link).show()
+})
+$(document).on('click','.back',function(e) {
+    $('.btn-search-container').show()
+    $('.back-container, .input-search').hide()
+    $('#search-represi, #search-provinsi, #search-institusi').val('')
+    $('.list').html('');
+})
 $(document).on('click','.btn-search',function(e) {
-    var search = $('.input-search').val()
+    var searchRepr = $('#search-represi').val()
+    var searchProv = $('#search-provinsi').val()
+    var searchInst = $('#search-institusi').val()
     var kasusFilteredProvinsi = [];
-    kasusFilteredProvinsi =  kasus.filter(function(data) {
-        return data.PROVINSI == search.toUpperCase();
-    });
     var tombol = '';
-        tombol += '<h3 style="text-align:center;color:#fff;text-shadow: 2px 2px rgb(0, 0, 0, 0.5);">Total '+kasusFilteredProvinsi.length+' Korban di Provinsi '+search.toUpperCase()+'</h3>'
+    if (searchRepr != '') {
+        kasusFilteredProvinsi =  kasus.filter(function(data) {
+            return data.JENIS == searchRepr.toUpperCase();
+        });
+        tombol += '<h3 style="text-align:center;color:#fff;text-shadow: 2px 2px rgb(0, 0, 0, 0.5);">Total '+kasusFilteredProvinsi.length+' Korban Jenis Represi '+searchRepr.toUpperCase()+'</h3>'
+    }
+    if (searchProv != '') {
+        kasusFilteredProvinsi =  kasus.filter(function(data) {
+            return data.PROVINSI == searchProv.toUpperCase();
+        });
+        tombol += '<h3 style="text-align:center;color:#fff;text-shadow: 2px 2px rgb(0, 0, 0, 0.5);">Total '+kasusFilteredProvinsi.length+' Korban di Provinsi '+searchProv.toUpperCase()+'</h3>'
+    }
+    if (searchInst != '') {
+        kasusFilteredProvinsi =  kasus.filter(function(data) {
+            return data.INSTITUSI == searchInst.toUpperCase();
+        });
+        tombol += '<h3 style="text-align:center;color:#fff;text-shadow: 2px 2px rgb(0, 0, 0, 0.5);">Total '+kasusFilteredProvinsi.length+' Korban Institusi '+searchInst.toUpperCase()+'</h3>'
+    }
         $.each(kasusFilteredProvinsi,function(kety, value){
-            tombol += '<div class="column" onclick="klik('+value.ID+')"><div class="card"><span>'+value.TANGGAL+'</span><br><br><b>'+value.LOKASI+'</b><br><br><b>'+value.GOLONGAN+'</b><p>'+value.ISU+'</p></div></div>';
+            tombol += '<div class="column" onclick="klik('+value.ID+')"><div class="card"><span>'+value.TANGGAL+'</span><br><br><b>'+value.LOKASI+'</b><br><br><b>'+value.GOLONGAN+'</b><br><br><p>'+value.ISU+'</p></div></div>';
         });
         $('.list').html(tombol);
+        tombol = '';
     kasusFilteredProvinsi = []
 })
 $(document).on('click','#readmore',function(e) {

@@ -28,15 +28,53 @@
     padding: 20px 20%;
 }
 .description-container p{
+    margin-bottom: 1rem;
     color: #fff;
     text-shadow: 1px 1px rgb(0, 0, 0, 0.5);
 }
+.btn-search-container{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+}
+.btn-search-container a{
+  display: block;
+  margin: 0 10px;
+  text-align: center;
+  padding: 10px;
+  background: #ddd;
+  color: #333;
+  border: none;
+  font-weight: 800;
+}
+.btn-search-container a:hover{
+  background: #fff;
+  color: #000;
+}
 .search-container{
     margin: 5vh auto;
-    position: relative;
     width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.back-container{
+  display: none;
+  z-index: 10;
+}
+.back-container a{
+    display: block;
+    font-weight: 800;
+    color: #fff;
+    text-align: center;
+    margin: 20px auto;
+}
+.search-input-container{
+  width: max-content;
+  position: relative;
 }
 .input-search{
+    display: none;
     text-transform: uppercase;
     width: 300px;
     border: 1px solid #ddd;
@@ -140,27 +178,13 @@
   padding: 16px;
   text-align: center;
   background: #d5d5d5;
-  height: 220px;
-}
-
-.card-dead:hover {
-  background: #999;
-  cursor: pointer;
-}
-
-.card-dead {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  text-align: center;
-  color: white;
-  background: black;
   height: 200px;
 }
 
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 100; /* Sit on top */
     padding-top: 20px; /* Location of the box */
     left: 0;
     top: 0;
