@@ -154,6 +154,9 @@
             <p id="L">L</p><br>
             <label>P :</label>
             <p id="P">P</p><br>
+            <div class="modal-readmore">
+                <a id="readmore">READ MORE</a>
+            </div>
         </div>
     </div>
     </div>
@@ -165,13 +168,12 @@ $(document).ready(function() {
         kasus = data.Sheet1;
         $('#count').html(kasus.length)
     });
-    $('.close').click(function() {
-        $('#myModal').slideUp(500);
-    })
 
     $(window).click(function(e) {
         if ($(e.target).is('#myModal')) {
             $('#myModal').slideUp(500);
+            $('.modal-body').css('max-height','80vh')
+            $('#readmore').show()
         }
     })
 })
@@ -218,7 +220,10 @@ $(document).on('click','.btn-search',function(e) {
         $('#count').html(kasusFilteredProvinsi.length)
     kasusFilteredProvinsi = []
 })
-
+$(document).on('click','#readmore',function(e) {
+    $('.modal-body').css('max-height','unset')
+    $(this).hide()
+})
 </script>
 </body>
 </html>
