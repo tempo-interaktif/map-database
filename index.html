@@ -219,8 +219,21 @@ function klik(id) {
 }
 $(document).on('click','.btn-search',function(e) {
     var search = $('.input-search').val()
-    console.log(search.toUpperCase())
+    var kasusFilteredProvinsi = [];
+    kasusFilteredProvinsi =  kasus.filter(function(data) {
+        return data.PROVINSI == search.toUpperCase();
+    });
+    var tombol = '';
+        tombol += '<h3>Daftar Korban Provinsi '+search.toUpperCase()+'</h3>'
+        $.each(kasusFilteredProvinsi,function(kety, value){
+            tombol += '<div class="column" onclick="klik('+value.ID+')"><div class="card"><span>'+value.TANGGAL+'</span><br><br><b>'+value.LOKASI+'</b><br><br><b>'+value.GOLONGAN+'</b><p>'+value.ISU+'</p></div></div>';
+        });
+        $('.list').html(tombol);
+        $('.paragraf').hide();
+        $('#count').html(kasusFilteredProvinsi.length)
+    kasusFilteredProvinsi = []
 })
+
 </script>
 </body>
 </html>
