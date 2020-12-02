@@ -117,7 +117,8 @@
     </div>
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <div class="modal-body">
+        <div class="modal-body" style="position: relative;">
+            <span style="cursor:pointer;font-size:30px;position:absolute;top: 20px;right: 20px;font-weight: bold;" id="close">&times;</span>
             <!-- <ul class="icon-container">
                 <li>
                     <p>lorem</p>
@@ -138,7 +139,7 @@
                     </span>
                 </li>
             </ul> -->
-            <h3 class="hide-desktop" id="name">Tanggal</h3><br>
+            <h3 id="name" style="padding-right: 30px;">Tanggal</h3><br>
             <label>LOKASI :</label>
             <p id="LOKASI">LOKASI</p><br>
             <label>PROVINSI :</label>
@@ -197,6 +198,11 @@ $(document).ready(function() {
             $('#readmore').show()
         }
     })
+})
+$(document).on('click','#close',function(e) {
+    $('#myModal').slideUp(500);
+    $('.modal-body').css('max-height','80vh')
+    $('#readmore').show()
 })
 function klik(id) {
   kasusFiltered =  kasus.filter(function(data) {
