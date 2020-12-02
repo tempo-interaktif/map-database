@@ -78,10 +78,28 @@
                     <a data-target="#search-provinsi" class="btn-search-category">Provinsi</a>
                 </div>
                 <div class="back-container">
+                    <div class="input-search ct" id="search-represi">
+                        <div class="btn-category">
+                            <a class="category-detail" data-value="Kriminalisasi" data-target="represi">Kriminalisasi</a>
+                            <a class="category-detail" data-value="Pelarangan" data-target="represi">Pelarangan</a>
+                            <a class="category-detail" data-value="Pembubaran" data-target="represi">Pembubaran</a>
+                            <a class="category-detail" data-value="Pembungkaman Berpendapat" data-target="represi">Pembungkaman Berpendapat</a>
+                            <a class="category-detail" data-value="Penangkapan" data-target="represi">Penangkapan</a>
+                            <a class="category-detail" data-value="Penganiayaan" data-target="represi">Penganiayaan</a>
+                        </div>
+                    </div>
+                    <div class="input-search ct" id="search-institusi">
+                        <div class="btn-category">
+                            <a class="category-detail" data-value="Ormas" data-target="institusi">Ormas</a>
+                            <a class="category-detail" data-value="Pemerintah" data-target="institusi">Pemerintah</a>
+                            <a class="category-detail" data-value="Polisi" data-target="institusi">Polisi</a>
+                            <a class="category-detail" data-value="Swasta" data-target="institusi">Swasta</a>
+                            <a class="category-detail" data-value="TNI" data-target="institusi">TNI</a>
+                            <a class="category-detail" data-value="Warga dan Orang Tak Dikenal" data-target="institusi">Warga dan Orang Tak Dikenal</a>
+                        </div>
+                    </div>
                     <div class="search-input-container">
                         <button class="btn-search"><i class="fa fa-search"></i></button>
-                        <input type="text" id="search-represi" class="input-search" placeholder="Cari Jenis Represi">
-                        <input type="text" id="search-institusi" class="input-search" placeholder="Cari Institusi">
                         <input type="text" id="search-provinsi" class="input-search" placeholder="Cari Provinsi">
                     </div>
                     <a data-target="#back" class="back">Kembali ke awal</a>
@@ -217,6 +235,29 @@ $(document).on('click','.back',function(e) {
     $('.back-container, .input-search').hide()
     $('#search-represi, #search-provinsi, #search-institusi').val('')
     $('.list').html('');
+})
+$(document).on('click','.category-detail',function(e) {
+    var kasusFilteredProvinsi = [];
+    var tombol = '';
+    var search = $(this).data('value')
+    if ($(this).data('target') == 'represi') {
+        kasusFilteredProvinsi =  kasus.filter(function(data) {
+            return data.JENIS == search;
+        });
+        tombol += '<h3 style="text-align:center;color:#fff;text-shadow: 2px 2px rgb(0, 0, 0, 0.5);">Total '+kasusFilteredProvinsi.length+' Korban Jenis Represi '+search+'</h3>'
+    }
+    if ($(this).data('target') == 'institusi') {
+        kasusFilteredProvinsi =  kasus.filter(function(data) {
+            return data.INSTITUSI == search;
+        });
+        tombol += '<h3 style="text-align:center;color:#fff;text-shadow: 2px 2px rgb(0, 0, 0, 0.5);">Total '+kasusFilteredProvinsi.length+' Korban Institusi '+search+'</h3>'
+    }
+    $.each(kasusFilteredProvinsi,function(kety, value){
+            tombol += '<div class="column" onclick="klik('+value.ID+')"><div class="card"><span>'+value.TANGGAL+'</span><br><br><b>'+value.LOKASI+'</b><br><br><b>'+value.GOLONGAN+'</b><br><br><p>'+value.ISU+'</p></div></div>';
+        });
+        $('.list').html(tombol);
+        tombol = '';
+    kasusFilteredProvinsi = []
 })
 $(document).on('click','.btn-search',function(e) {
     var searchRepr = $('#search-represi').val()
